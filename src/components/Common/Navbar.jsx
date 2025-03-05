@@ -38,6 +38,7 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -159,9 +160,29 @@ function Navbar() {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
-          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-        </button>
+        <div className="relative">
+        <button  onClick={() => setIsOpen(!isOpen)}
+          className="mr-4 md:hidden bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold">
+            <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+            
+          </button>
+          {isOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50">
+              <a
+                href="/login"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+              >
+                Login
+              </a>
+              <a
+                href="/signup"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+              >
+                Sign Up
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
